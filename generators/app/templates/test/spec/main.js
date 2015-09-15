@@ -1,4 +1,4 @@
-describe('<% appname %>', function () {
+describe('<%= appname %>', function () {
   var expect,
       assert,
       chai = require('chai'),

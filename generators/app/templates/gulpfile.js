@@ -16,15 +16,18 @@ var gulp = require('gulp'),
 gulp.task('js', function () {
   gulp.src('src/scripts/**/*.js')
   .pipe(plumber({
-    errorHandler: notify.onError('<% gulpNotifyOnErrorString %>')
+    errorHandler: notify.onError({
+      title: 'Gulp',
+      message: 'Failed to build JS'
+    })
   }))
-  .pipe(concat('<% appnameSlug %>.js'))
+  .pipe(concat('<%= appnameSlug %>.js'))
   .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('js:min', function () {
   gulp.src('src/scripts/**/*.js')
-  .pipe(concat('<% appnameSlug %>.min.js'))
+  .pipe(concat('<%= appnameSlug %>.min.js'))
   .pipe(uglify())
   .pipe(gulp.dest('dist/'));
 });
@@ -32,11 +35,14 @@ gulp.task('js:min', function () {
 gulp.task('less', function () {
   gulp.src('src/styles/main.less')
   .pipe(plumber({
-    errorHandler: notify.onError('<% gulpNotifyOnErrorString %>')
+    errorHandler: notify.onError({
+      title: 'Gulp',
+      message: 'Failed to build LESS'
+    })
   }))
   .pipe(less())
   .pipe(autoprefixer())
-  .pipe(rename('<% appnameSlug %>.css'))
+  .pipe(rename('<%= appnameSlug %>.css'))
   .pipe(gulp.dest('dist/'));
 });
 
@@ -45,7 +51,7 @@ gulp.task('less:min', function () {
   .pipe(less())
   .pipe(autoprefixer())
   .pipe(minifyCss())
-  .pipe(rename('<% appnameSlug %>.min.css'))
+  .pipe(rename('<%= appnameSlug %>.min.css'))
   .pipe(gulp.dest('dist/'));
 });
 
