@@ -28,19 +28,39 @@ Generator.prototype.askFor = function () {
       name: 'appname',
       message: 'What is your project name?',
       default: this.appname
+    },
+    {
+      type: 'input',
+      name: 'description',
+      message: 'Project description'
+    },
+    {
+      type: 'input',
+      name: 'version',
+      message: 'Version',
+      default: '1.0.0'
+    },
+    {
+      type: 'input',
+      name: 'repository',
+      message: 'What is the name of your repository?'
     }
   ];
 
   this.prompt(prompts, function (answers) {
     this.appname = answers.appname;
     this.appnameSlug = _.kebabCase(this.appname);
+    this.repository = answers.repository;
+    this.projectDescription = answers.description;
+    this.version = answers.version;
     done();
   }.bind(this));
+
 };
 
 Generator.prototype.buildTemplates = function () {
   this.template('_package.json', 'package.json');
-  this.template('_travis.yml', 'travis.yml');
+  this.template('_travis.yml', '.travis.yml');
   this.template('README.md', 'README.md');
   this.template('gulpfile.js', 'gulpfile.js');
   this.copy('gitignore', '.gitignore');
