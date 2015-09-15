@@ -1,8 +1,9 @@
 {
   "name": "<%= appname %>",
-  "version": "0.0.0",
-  "description": "",
+  "version": "<%= version %>",
+  "description": "<%= projectDescription %>",
   "license": "MIT",
+  "repository": "<%= repository %>",
   "scripts": {
     "test": "mocha"
   },
