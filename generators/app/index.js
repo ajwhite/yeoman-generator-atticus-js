@@ -42,4 +42,17 @@ Generator.prototype.buildTemplates = function () {
   this.copy('jscsrc', '.jscsrc');
   this.copy('jshintrc', '.jshintrc');
   this.copy('editorconfig', '.editorconfig');
+
+  this.fs.copy(
+    this.templatePath('src/scripts/main.js'),
+    this.destinationPath('src/scripts/main.js')
+  );
+  this.fs.copy(
+    this.templatePath('src/styles/main.less'),
+    this.destinationPath('src/styles/main.less')
+  );
+  this.fs.copy(
+    this.templatePath('test/spec/main.js'),
+    this.destinationPath('test/spec/main.js')
+  );
 };

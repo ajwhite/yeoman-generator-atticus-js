@@ -15,9 +15,9 @@ var gulp = require('gulp'),
 
 gulp.task('js', function () {
   gulp.src('src/scripts/**/*.js')
-  .pipe(plumber(
+  .pipe(plumber({
     errorHandler: notify.onError('<% gulpNotifyOnErrorString %>')
-  ))
+  }))
   .pipe(concat('<% appnameSlug %>.js'))
   .pipe(gulp.dest('dist/'));
 });
@@ -31,9 +31,9 @@ gulp.task('js:min', function () {
 
 gulp.task('less', function () {
   gulp.src('src/styles/main.less')
-  .pipe(plumber(
+  .pipe(plumber({
     errorHandler: notify.onError('<% gulpNotifyOnErrorString %>')
-  ))
+  }))
   .pipe(less())
   .pipe(autoprefixer())
   .pipe(rename('<% appnameSlug %>.css'))
@@ -62,6 +62,12 @@ gulp.task('jscs', function () {
 
 gulp.task('unittest', function () {
   gulp.src('test/spec/**/*.js')
+  .pipe(plumber({
+    errorHandler: notify.onError({
+      title: 'Gulp',
+      message: 'Unit tests failed'
+    })
+  }))
   .pipe(mocha({reporter: 'spec', growl: 'true'}));
 });
 
