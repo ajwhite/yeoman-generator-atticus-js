@@ -20,6 +20,24 @@ Generator.prototype.welcome = function () {
   this.log(yosay('Hello! We\'re going to build a Javascript project'));
 };
 
+Generator.prototype.askFor = function () {
+  var done = this.async();
+  var prompts = [
+    {
+      type: 'input',
+      name: 'appname',
+      message: 'What is your project name?',
+      default: this.appname
+    }
+  ];
+
+  this.prompt(prompts, function (answers) {
+    this.appname = answers.appname;
+    this.appnameSlug = _.kebabCase(this.appname);
+    done();
+  }.bind(this));
+};
+
 Generator.prototype.buildTemplates = function () {
   this.template('_package.json', 'package.json');
   this.template('_travis.yml', 'travis.yml');
